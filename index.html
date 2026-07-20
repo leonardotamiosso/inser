@@ -345,47 +345,8 @@
   @media (max-width:980px){ .areas-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .areas-grid{ grid-template-columns:1fr;} }
 
-  /* ---------- TEAM FILTERS (segmented control glass) ---------- */
-  .team-filters{
-    display:inline-flex; gap:4px;
-    padding:5px;
-    border-radius:100px;
-    background:rgba(255,255,255,0.5);
-    border:1px solid rgba(255,255,255,0.7);
-    backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%);
-    box-shadow:var(--shadow-sm);
-    margin-bottom:32px;
-    flex-wrap:wrap;
-  }
-  .team-filter{
-    border:none; background:transparent;
-    padding:10px 20px; border-radius:100px;
-    font-size:13.5px; font-weight:600; color:var(--ink-soft);
-    transition:background .4s var(--ease), color .3s ease, box-shadow .4s ease;
-    white-space:nowrap;
-  }
-  .team-filter.active{ background:var(--ink); color:#fff; box-shadow:var(--shadow-sm); }
-  .team-filter:not(.active):hover{ color:var(--ink); }
-  @media (max-width:560px){
-    .team-filters{ width:100%; justify-content:space-between; }
-    .team-filter{ padding:10px 12px; font-size:12.5px; }
-  }
-
   /* ---------- TEAM CAROUSEL ---------- */
   .team-carousel-wrap{ position:relative; }
-  .team-card.is-hidden{ display:none; }
-
-  @media (max-width:760px){
-    .team-track{
-      flex-direction:column;
-      overflow-x:visible;
-      cursor:default;
-      padding:6px 6px 6px;
-    }
-    .team-track.dragging{ cursor:default; }
-    .team-card{ flex:0 0 auto; width:100%; max-width:420px; margin:0 auto; }
-    .carousel-nav{ display:none; }
-  }
   .team-track{
     display:flex; gap:20px;
     overflow-x:auto;
@@ -403,7 +364,7 @@
     flex:0 0 clamp(240px, 27vw, 300px);
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
     overflow:hidden; display:flex; flex-direction:column;
-    transition:transform .5s var(--ease), box-shadow .5s var(--ease), opacity .4s ease;
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease);
     user-select:none;
   }
   .team-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
@@ -718,7 +679,7 @@
         <div class="hero-facts">
           <div class="fact"><b>2019</b><span>Fundação do instituto</span></div>
           <div class="fact"><b>2023</b><span>Sede própria em Santiago</span></div>
-          <div class="fact"><b>9+</b><span>Especialistas na equipe</span></div>
+          <div class="fact"><b>8+</b><span>Especialistas na equipe</span></div>
         </div>
       </div>
     </div>
@@ -924,7 +885,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Especialidades</p>
-      <h2>Oito áreas clínicas, um só planejamento de cuidado.</h2>
+      <h2>Sete áreas clínicas, um só planejamento de cuidado.</h2>
       <p class="lede">Cada especialidade tem gente dedicada só pra ela dentro do INSER — a equipe completa está logo abaixo.</p>
     </div>
 
@@ -979,21 +940,13 @@
     <div class="section-head reveal">
       <p class="eyebrow">Nossa equipe</p>
       <h2>Cada especialidade, com um especialista dedicado.</h2>
-      <p class="lede">Psicólogas fazem o próprio agendamento — os demais atendimentos passam pela recepção.</p>
-    </div>
-
-    <div class="team-filters reveal" role="tablist">
-      <button class="team-filter active" data-cat="dentistas" role="tab" aria-selected="true">Dentistas</button>
-      <button class="team-filter" data-cat="psicologos" role="tab" aria-selected="false">Psicólogos</button>
-      <button class="team-filter" data-cat="medicos" role="tab" aria-selected="false">Médicos</button>
-      <button class="team-filter" data-cat="esteticistas" role="tab" aria-selected="false">Esteticistas</button>
-      <button class="team-filter" data-cat="equipe" role="tab" aria-selected="false">Equipe</button>
+      <p class="lede">Arraste para o lado para ver todo mundo. Psicólogas fazem o próprio agendamento — os demais atendimentos passam pela recepção.</p>
     </div>
 
     <div class="team-carousel-wrap reveal">
       <div class="team-track" id="teamTrack">
 
-        <div class="team-card" data-cat="dentistas">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-renato.webp" alt="Prof. Dr. Renato Bitencourt, diretor clínico do INSER" loading="lazy" decoding="async" draggable="false">
           </div>
@@ -1009,7 +962,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="psicologos">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-cristina.webp" alt="Cristina Bernardes Machado Flores, psicóloga do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 1</span>
@@ -1026,7 +979,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="esteticistas">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-roberta.webp" alt="Roberta Bitencourt Rosado, especialista em estética do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 3</span>
@@ -1043,7 +996,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="psicologos">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-maiara.webp" alt="Maiara Freitas, psicóloga clínica do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 5</span>
@@ -1060,7 +1013,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="medicos">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-davi.webp" alt="Dr. Davi Morais, clínico geral do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 6</span>
@@ -1077,7 +1030,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="medicos">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-amanda.webp" alt="Dra. Amanda Medeiros, nutróloga do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 6</span>
@@ -1094,7 +1047,7 @@
           </div>
         </div>
 
-        <div class="team-card" data-cat="dentistas">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-leonardo.webp" alt="Dr. Leonardo Brum, dentista do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 7</span>
@@ -1111,7 +1064,7 @@
           </div>
         </div>
 
-        <div class="team-card" data-cat="dentistas">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-marcelo.webp" alt="Dr. Marcelo Ribeiro Guterres, ortodontista do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">Sala 8</span>
@@ -1128,7 +1081,7 @@
           </div>
         </div>
 
-        <div class="team-card is-hidden" data-cat="medicos">
+        <div class="team-card">
           <div class="team-photo">
             <img src="assets/team-capilar.webp" alt="Dr. João Henrique Lemes, especialista em Tricologia e Transplante Capilar do INSER" loading="lazy" decoding="async" draggable="false">
             <span class="room">CRM-RS 56626</span>
@@ -1141,57 +1094,6 @@
             <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066&text=Ol%C3%A1!%20Quero%20agendar%20uma%20avalia%C3%A7%C3%A3o%20de%20Transplante%20Capilar." target="_blank">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
               Agendar via recepção
-            </a>
-          </div>
-        </div>
-
-        <div class="team-card is-hidden" data-cat="equipe">
-          <div class="team-photo">
-            <span class="initials">?</span>
-            <span class="pending">Nome pendente</span>
-          </div>
-          <div class="team-info">
-            <span class="name">[Nome a confirmar]</span>
-            <span class="role">Gestão Administrativa</span>
-            <span class="reg">Perfil a confirmar</span>
-            <p class="bio">Responsável pela organização administrativa do INSER — informações completas em breve.</p>
-            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
-              Falar com a recepção
-            </a>
-          </div>
-        </div>
-
-        <div class="team-card is-hidden" data-cat="equipe">
-          <div class="team-photo">
-            <span class="initials">?</span>
-            <span class="pending">Nome pendente</span>
-          </div>
-          <div class="team-info">
-            <span class="name">[Nome a confirmar]</span>
-            <span class="role">Relacionamento com o Paciente</span>
-            <span class="reg">Perfil a confirmar</span>
-            <p class="bio">Primeiro contato de quem chega ao INSER — cuida do acolhimento e do agendamento. Informações completas em breve.</p>
-            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
-              Falar com a recepção
-            </a>
-          </div>
-        </div>
-
-        <div class="team-card is-hidden" data-cat="equipe">
-          <div class="team-photo">
-            <span class="initials">?</span>
-            <span class="pending">Nome pendente</span>
-          </div>
-          <div class="team-info">
-            <span class="name">[Nome a confirmar]</span>
-            <span class="role">Governança &amp; Conservação</span>
-            <span class="reg">Perfil a confirmar</span>
-            <p class="bio">Cuida do ambiente do INSER, garantindo um espaço sempre limpo e acolhedor. Informações completas em breve.</p>
-            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
-              Falar com a recepção
             </a>
           </div>
         </div>
@@ -1641,57 +1543,6 @@
   var snapRAF = null;
 
   function getCards(){ return Array.prototype.slice.call(track.querySelectorAll('.team-card')); }
-
-  // ---------- FILTRO POR CATEGORIA (Dentistas / Psicólogos / Médicos / Equipe) ----------
-  var filterBtns = document.querySelectorAll('.team-filter');
-  function applyTeamFilter(cat){
-    getCards().forEach(function(c){
-      var match = c.dataset.cat === cat;
-      if(reduceMotion){ c.classList.toggle('is-hidden', !match); return; }
-      if(match){
-        c.classList.remove('is-hidden');
-        requestAnimationFrame(function(){ c.style.opacity = '1'; });
-      } else {
-        c.style.opacity = '0';
-      }
-    });
-    if(!reduceMotion){
-      setTimeout(function(){
-        getCards().forEach(function(c){ if(c.dataset.cat !== cat){ c.classList.add('is-hidden'); } });
-      }, 380);
-    }
-    track.scrollLeft = 0;
-    updateCardParallax();
-  }
-  filterBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      filterBtns.forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected','true');
-      applyTeamFilter(btn.dataset.cat);
-    });
-  });
-  applyTeamFilter(filterBtns[0] ? filterBtns[0].dataset.cat : 'dentistas');
-
-  // ---------- PARALLAX NO MOBILE (cards surgem/desaparecem suave ao rolar) ----------
-  function updateCardParallax(){
-    if(window.innerWidth > 760 || reduceMotion) return;
-    var vh = window.innerHeight;
-    getCards().forEach(function(c){
-      if(c.classList.contains('is-hidden')) return;
-      var r = c.getBoundingClientRect();
-      var center = r.top + r.height / 2;
-      var dist = (center - vh / 2) / (vh / 2); // -1 (acima) a 1 (abaixo)
-      var clamped = Math.max(-1, Math.min(1, dist));
-      var opacity = 1 - Math.min(Math.abs(clamped) * 0.85, 0.8);
-      var translate = clamped * 22;
-      c.style.opacity = String(opacity);
-      c.style.transform = 'translateY(' + translate.toFixed(1) + 'px)';
-    });
-  }
-  window.addEventListener('scroll', function(){ requestAnimationFrame(updateCardParallax); }, { passive: true });
-  window.addEventListener('resize', function(){ requestAnimationFrame(updateCardParallax); }, { passive: true });
-  updateCardParallax();
 
   function cardOffsets(){
     var trackLeft = track.getBoundingClientRect().left - track.scrollLeft;
