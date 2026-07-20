@@ -345,8 +345,50 @@
   @media (max-width:980px){ .areas-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:560px){ .areas-grid{ grid-template-columns:1fr;} }
 
+  /* ---------- TEAM FILTERS (segmented control glass) ---------- */
+  .team-filters{
+    display:inline-flex; flex-wrap:nowrap; gap:4px;
+    padding:5px;
+    border-radius:100px;
+    background:rgba(255,255,255,0.5);
+    border:1px solid rgba(255,255,255,0.7);
+    backdrop-filter:blur(20px) saturate(180%); -webkit-backdrop-filter:blur(20px) saturate(180%);
+    box-shadow:var(--shadow-sm);
+    margin-bottom:32px;
+    max-width:100%;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    scroll-behavior:smooth;
+  }
+  .team-filters::-webkit-scrollbar{ display:none; }
+  .team-filter{
+    border:none; background:transparent;
+    padding:10px 20px; border-radius:100px;
+    font-size:13.5px; font-weight:600; color:var(--ink-soft);
+    transition:background .4s var(--ease), color .3s ease, box-shadow .4s ease;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .team-filter.active{ background:var(--ink); color:#fff; box-shadow:var(--shadow-sm); }
+  .team-filter:not(.active):hover{ color:var(--ink); }
+  @media (max-width:560px){
+    .team-filter{ padding:10px 14px; font-size:12.5px; }
+  }
+
   /* ---------- TEAM CAROUSEL ---------- */
   .team-carousel-wrap{ position:relative; }
+  .team-card.is-hidden{ display:none; }
+
+  @media (max-width:760px){
+    .team-track{
+      flex-direction:column;
+      overflow-x:visible;
+      cursor:default;
+      padding:6px 6px 6px;
+    }
+    .team-track.dragging{ cursor:default; }
+    .team-card{ flex:0 0 auto; width:100%; max-width:420px; margin:0 auto; }
+  }
   .team-track{
     display:flex; gap:20px;
     overflow-x:auto;
@@ -364,7 +406,7 @@
     flex:0 0 clamp(240px, 27vw, 300px);
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
     overflow:hidden; display:flex; flex-direction:column;
-    transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+    transition:transform .5s var(--ease), box-shadow .5s var(--ease), opacity .4s ease;
     user-select:none;
   }
   .team-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); }
@@ -374,10 +416,10 @@
   .team-photo .room{ position:absolute; top:12px; right:12px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em; background:rgba(22,24,26,0.55); color:#fff; padding:5px 10px; border-radius:100px; backdrop-filter:blur(6px); }
   .team-photo .pending{ position:absolute; bottom:12px; left:12px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase; background:rgba(255,255,255,0.9); color:var(--ink); padding:5px 10px; border-radius:100px; }
   .team-info{ padding:18px 20px 22px; display:flex; flex-direction:column; gap:9px; flex:1; }
-  .team-info .name{ font-family:'Cabinet Grotesk',sans-serif; font-size:16.5px; line-height:1.2; }
-  .team-info .role{ font-size:11.5px; font-family:'JetBrains Mono',monospace; color:var(--teal); letter-spacing:0.03em; text-transform:uppercase; }
-  .team-info .reg{ font-size:11.5px; color:var(--ink-faint); }
-  .team-info p.bio{ font-size:12.5px; line-height:1.5; color:var(--ink-soft); margin:0; flex:1; }
+  .team-info .name{ font-family:'Cabinet Grotesk',sans-serif; font-size:16.5px; line-height:1.22; min-height:2.44em; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+  .team-info .role{ font-size:11.5px; font-family:'JetBrains Mono',monospace; color:var(--teal); letter-spacing:0.03em; text-transform:uppercase; line-height:1.35; min-height:2.7em; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+  .team-info .reg{ font-size:11.5px; color:var(--ink-faint); min-height:1.3em; }
+  .team-info p.bio{ font-size:12.5px; line-height:1.5; color:var(--ink-soft); margin:0; flex:1; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; }
   .team-info .wa{
     margin-top:6px; display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; color:var(--ink);
     padding:10px 14px; border-radius:100px; border:1px solid var(--line-strong);
@@ -385,14 +427,6 @@
   }
   .team-info .wa:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
   .team-info .wa svg{ width:14px;height:14px; }
-
-  .carousel-nav{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
-  .carousel-nav button{
-    width:44px;height:44px;border-radius:100px; border:1px solid var(--line-strong); background:var(--surface);
-    display:flex;align-items:center;justify-content:center; transition:transform .3s var(--ease), background .3s ease;
-  }
-  .carousel-nav button:hover{ background:var(--paper); transform:translateY(-2px); }
-  .carousel-nav svg{ width:17px;height:17px; }
 
   @media (max-width:560px){ .team-card{ flex-basis:78vw; } }
 
@@ -679,7 +713,7 @@
         <div class="hero-facts">
           <div class="fact"><b>2019</b><span>Fundação do instituto</span></div>
           <div class="fact"><b>2023</b><span>Sede própria em Santiago</span></div>
-          <div class="fact"><b>8+</b><span>Especialistas na equipe</span></div>
+          <div class="fact"><b>9+</b><span>Especialistas na equipe</span></div>
         </div>
       </div>
     </div>
@@ -885,7 +919,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Especialidades</p>
-      <h2>Sete áreas clínicas, um só planejamento de cuidado.</h2>
+      <h2>Oito áreas clínicas, um só planejamento de cuidado.</h2>
       <p class="lede">Cada especialidade tem gente dedicada só pra ela dentro do INSER — a equipe completa está logo abaixo.</p>
     </div>
 
@@ -940,15 +974,24 @@
     <div class="section-head reveal">
       <p class="eyebrow">Nossa equipe</p>
       <h2>Cada especialidade, com um especialista dedicado.</h2>
-      <p class="lede">Arraste para o lado para ver todo mundo. Psicólogas fazem o próprio agendamento — os demais atendimentos passam pela recepção.</p>
+      <p class="lede">Psicólogas fazem o próprio agendamento — os demais atendimentos passam pela recepção.</p>
+    </div>
+
+    <div class="team-filters reveal" role="tablist">
+      <button class="team-filter active" data-cat="dentistas" role="tab" aria-selected="true">Dentistas</button>
+      <button class="team-filter" data-cat="psicologos" role="tab" aria-selected="false">Psicólogos</button>
+      <button class="team-filter" data-cat="medicos" role="tab" aria-selected="false">Médicos</button>
+      <button class="team-filter" data-cat="esteticistas" role="tab" aria-selected="false">Esteticistas</button>
+      <button class="team-filter" data-cat="equipe" role="tab" aria-selected="false">Equipe</button>
     </div>
 
     <div class="team-carousel-wrap reveal">
       <div class="team-track" id="teamTrack">
 
-        <div class="team-card">
+        <div class="team-card" data-cat="dentistas">
           <div class="team-photo">
-            <img src="assets/team-renato.webp" alt="Prof. Dr. Renato Bitencourt, diretor clínico do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-renato.webp" alt="Prof. Dr. Renato Bitencourt, diretor clínico do INSER" decoding="async" draggable="false">
+            <span class="room">Direção</span>
           </div>
           <div class="team-info">
             <span class="name">Prof. Dr. Renato Bitencourt</span>
@@ -962,9 +1005,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="psicologos">
           <div class="team-photo">
-            <img src="assets/team-cristina.webp" alt="Cristina Bernardes Machado Flores, psicóloga do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-cristina.webp" alt="Cristina Bernardes Machado Flores, psicóloga do INSER" decoding="async" draggable="false">
             <span class="room">Sala 1</span>
           </div>
           <div class="team-info">
@@ -979,9 +1022,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="esteticistas">
           <div class="team-photo">
-            <img src="assets/team-roberta.webp" alt="Roberta Bitencourt Rosado, especialista em estética do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-roberta.webp" alt="Roberta Bitencourt Rosado, especialista em estética do INSER" decoding="async" draggable="false">
             <span class="room">Sala 3</span>
           </div>
           <div class="team-info">
@@ -996,9 +1039,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="psicologos">
           <div class="team-photo">
-            <img src="assets/team-maiara.webp" alt="Maiara Freitas, psicóloga clínica do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-maiara.webp" alt="Maiara Freitas, psicóloga clínica do INSER" decoding="async" draggable="false">
             <span class="room">Sala 5</span>
           </div>
           <div class="team-info">
@@ -1013,9 +1056,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="medicos">
           <div class="team-photo">
-            <img src="assets/team-davi.webp" alt="Dr. Davi Morais, clínico geral do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-davi.webp" alt="Dr. Davi Morais, clínico geral do INSER" decoding="async" draggable="false">
             <span class="room">Sala 6</span>
           </div>
           <div class="team-info">
@@ -1030,9 +1073,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="medicos">
           <div class="team-photo">
-            <img src="assets/team-amanda.webp" alt="Dra. Amanda Medeiros, nutróloga do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-amanda.webp" alt="Dra. Amanda Medeiros, nutróloga do INSER" decoding="async" draggable="false">
             <span class="room">Sala 6</span>
           </div>
           <div class="team-info">
@@ -1047,9 +1090,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card" data-cat="dentistas">
           <div class="team-photo">
-            <img src="assets/team-leonardo.webp" alt="Dr. Leonardo Brum, dentista do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-leonardo.webp" alt="Dr. Leonardo Brum, dentista do INSER" decoding="async" draggable="false">
             <span class="room">Sala 7</span>
           </div>
           <div class="team-info">
@@ -1064,9 +1107,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card" data-cat="dentistas">
           <div class="team-photo">
-            <img src="assets/team-marcelo.webp" alt="Dr. Marcelo Ribeiro Guterres, ortodontista do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-marcelo.webp" alt="Dr. Marcelo Ribeiro Guterres, ortodontista do INSER" decoding="async" draggable="false">
             <span class="room">Sala 8</span>
           </div>
           <div class="team-info">
@@ -1081,9 +1124,9 @@
           </div>
         </div>
 
-        <div class="team-card">
+        <div class="team-card is-hidden" data-cat="medicos">
           <div class="team-photo">
-            <img src="assets/team-capilar.webp" alt="Dr. João Henrique Lemes, especialista em Tricologia e Transplante Capilar do INSER" loading="lazy" decoding="async" draggable="false">
+            <img src="assets/team-capilar.webp" alt="Dr. João Henrique Lemes, especialista em Tricologia e Transplante Capilar do INSER" decoding="async" draggable="false">
             <span class="room">CRM-RS 56626</span>
           </div>
           <div class="team-info">
@@ -1098,11 +1141,55 @@
           </div>
         </div>
 
-      </div>
+        <div class="team-card is-hidden" data-cat="equipe">
+          <div class="team-photo">
+            <span class="initials">?</span>
+            <span class="pending">Nome pendente</span>
+          </div>
+          <div class="team-info">
+            <span class="name">[Nome a confirmar]</span>
+            <span class="role">Gestão Administrativa</span>
+            <span class="reg">Perfil a confirmar</span>
+            <p class="bio">Responsável pela organização administrativa do INSER — informações completas em breve.</p>
+            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
+              Falar com a recepção
+            </a>
+          </div>
+        </div>
 
-      <div class="carousel-nav">
-        <button id="teamPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <button id="teamNext" aria-label="Próximo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l6-6-6-6"/></svg></button>
+        <div class="team-card is-hidden" data-cat="equipe">
+          <div class="team-photo">
+            <img src="assets/team-karine.webp" alt="Karine Machado, recepcionista do INSER" decoding="async" draggable="false">
+          </div>
+          <div class="team-info">
+            <span class="name">Karine Machado</span>
+            <span class="role">Relacionamento com o Paciente</span>
+            <span class="reg">Recepção</span>
+            <p class="bio">Primeiro contato de quem chega ao INSER — cuida do acolhimento e do agendamento.</p>
+            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
+              Falar com a recepção
+            </a>
+          </div>
+        </div>
+
+        <div class="team-card is-hidden" data-cat="equipe">
+          <div class="team-photo">
+            <img src="assets/team-anamiriam.webp" alt="Ana Miriam, responsável pela conservação do INSER" decoding="async" draggable="false">
+          </div>
+          <div class="team-info">
+            <span class="name">Ana Miriam</span>
+            <span class="role">Governança &amp; Conservação</span>
+            <span class="reg">Diarista</span>
+            <p class="bio">Cuida do ambiente do INSER, garantindo um espaço sempre limpo e acolhedor.</p>
+            <a class="wa" href="https://api.whatsapp.com/send?phone=555599388066" target="_blank">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12a8 8 0 1 1-3.7-6.75L20 4l-1.2 3.9A7.96 7.96 0 0 1 20 12Z"/></svg>
+              Falar com a recepção
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1312,10 +1399,20 @@
     lastY = y;
   }, { passive: true });
 
+  var mouseMoveTicking = false;
   document.addEventListener('mousemove', function(e){
-    if(!isLargeScreen.matches) return;
-    mouseNearTop = e.clientY < 90;
-    updateDesktopNav(window.scrollY, false);
+    if(!isLargeScreen.matches || mouseMoveTicking) return;
+    mouseMoveTicking = true;
+    var y = e.clientY;
+    requestAnimationFrame(function(){
+      mouseMoveTicking = false;
+      var wasNear = mouseNearTop;
+      // zona morta entre 70 e 130px: evita ficar ligando/desligando o blur
+      // repetidamente quando o mouse fica bem na fronteira
+      if(y < 70){ mouseNearTop = true; }
+      else if(y > 130){ mouseNearTop = false; }
+      if(wasNear !== mouseNearTop){ updateDesktopNav(window.scrollY, false); }
+    });
   }, { passive: true });
 
   // ---------- MOBILE MENU ----------
@@ -1544,6 +1641,100 @@
 
   function getCards(){ return Array.prototype.slice.call(track.querySelectorAll('.team-card')); }
 
+  // ---------- FILTRO POR CATEGORIA (Dentistas / Psicólogos / Médicos / Equipe) ----------
+  var filterBtns = document.querySelectorAll('.team-filter');
+  var filterTransitionLock = false;
+
+  function applyTeamFilter(cat){
+    if(reduceMotion){
+      getCards().forEach(function(c){ c.classList.toggle('is-hidden', c.dataset.cat !== cat); });
+      track.scrollLeft = 0;
+      return;
+    }
+
+    // Etapa 1: o que está visível agora desaparece primeiro (fade rápido),
+    // ANTES de qualquer card novo entrar — assim os dois grupos nunca
+    // disputam espaço no layout ao mesmo tempo (era isso que causava
+    // aquele "inchaço" estranho na troca).
+    var visible = getCards().filter(function(c){ return !c.classList.contains('is-hidden'); });
+
+    // já está tudo certo (ex: primeiro carregamento da página) — não precisa animar nada
+    if(visible.length && visible.every(function(c){ return c.dataset.cat === cat; })){
+      track.scrollLeft = 0;
+      if(window.innerWidth <= 760){ updateCardParallax(); }
+      return;
+    }
+
+    // Trava o parallax de scroll enquanto a troca acontece — sem isso, rolar
+    // a página no meio da transição faz as duas animações mexerem na mesma
+    // propriedade (opacity) ao mesmo tempo, e os cards ficam "perdidos".
+    filterTransitionLock = true;
+
+    visible.forEach(function(c){ c.style.opacity = '0'; });
+
+    setTimeout(function(){
+      var mobileParallax = window.innerWidth <= 760;
+
+      getCards().forEach(function(c){
+        var match = c.dataset.cat === cat;
+        c.classList.toggle('is-hidden', !match);
+        if(!match){ c.style.transform = ''; return; }
+
+        // Etapa 2: com os antigos já fora do fluxo, os novos entram.
+        if(mobileParallax){
+          c.style.opacity = '';
+          c.style.transform = '';
+        } else {
+          c.style.opacity = '0';
+        }
+      });
+
+      track.scrollLeft = 0;
+
+      if(mobileParallax){
+        updateCardParallax();
+        filterTransitionLock = false;
+      } else {
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            getCards().forEach(function(c){ if(c.dataset.cat === cat){ c.style.opacity = '1'; } });
+            filterTransitionLock = false;
+          });
+        });
+      }
+    }, 220);
+  }
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      applyTeamFilter(btn.dataset.cat);
+      btn.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+    });
+  });
+  applyTeamFilter(filterBtns[0] ? filterBtns[0].dataset.cat : 'dentistas');
+
+  // ---------- PARALLAX NO MOBILE (cards surgem/desaparecem suave ao rolar) ----------
+  function updateCardParallax(){
+    if(window.innerWidth > 760 || reduceMotion) return;
+    var vh = window.innerHeight;
+    getCards().forEach(function(c){
+      if(c.classList.contains('is-hidden')) return;
+      var r = c.getBoundingClientRect();
+      var center = r.top + r.height / 2;
+      var dist = (center - vh / 2) / (vh / 2); // -1 (acima) a 1 (abaixo)
+      var clamped = Math.max(-1, Math.min(1, dist));
+      var opacity = 1 - Math.min(Math.abs(clamped) * 0.85, 0.8);
+      var translate = clamped * 22;
+      c.style.opacity = String(opacity);
+      c.style.transform = 'translateY(' + translate.toFixed(1) + 'px)';
+    });
+  }
+  window.addEventListener('scroll', function(){ if(!filterTransitionLock){ requestAnimationFrame(updateCardParallax); } }, { passive: true });
+  window.addEventListener('resize', function(){ requestAnimationFrame(updateCardParallax); }, { passive: true });
+  updateCardParallax();
+
   function cardOffsets(){
     var trackLeft = track.getBoundingClientRect().left - track.scrollLeft;
     return getCards().map(function(c){ return c.getBoundingClientRect().left - trackLeft; });
@@ -1641,8 +1832,7 @@
   track.addEventListener('pointerleave', function(){ if(isDown) endDrag(); });
   track.addEventListener('click', function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); } }, true);
 
-  document.getElementById('teamNext').addEventListener('click', function(){ pinToIndex(Math.min(nearestIndex(0) + 1, getCards().length - 1)); });
-  document.getElementById('teamPrev').addEventListener('click', function(){ pinToIndex(Math.max(nearestIndex(0) - 1, 0)); });
+
 })();
 </script>
 </body>
